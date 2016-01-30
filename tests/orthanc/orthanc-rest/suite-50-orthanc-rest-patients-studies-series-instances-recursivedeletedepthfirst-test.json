@@ -1,0 +1,567 @@
+{
+    "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test",
+    "runnable": true,
+    "expectSuccess": true,
+    "module": "@cmppath/common-test/requestreply-test",
+    "constructorName": "RequestReply_Constructor",
+    "methodName": "pF_RequestReply",
+    "scheduleSubs": "SERIES",
+    "parms": {
+        "salutation": "Hello suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test. You are using te2est asyncshell written in Javascript. Copyright 2014 2015 Antonio Carrasco Valero {{CopyrightNoticeJSON2}} Licensed under the EUPL, Version 1.1 only (the 'Licence'); You may not use this work except in compliance with the Licence. You may obtain a copy of the Licence at: https://joinup.ec.europa.eu/software/page/eupl/licence-eupl Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an 'AS IS' basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the Licence for the specific language governing permissions and limitations under the Licence.  {{LicenseJSON2}}  {{LicensedJSON1}} {{LicensedJSON2}}",
+        "requestreply": {
+            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+            "requestmethod": "GET",
+            "URLpath": "/patients",
+            "URLparms": {
+                "limit": "~patientsiterator.limit"
+            },
+            "URLparmsnotencoded": null,
+            "URLpathParms": null,
+            "statuscode": 200,
+            "dumpurl":                true,
+            "UNUSED_dumprequestdata": true,
+            "UNUSED_dumpreply":       true
+        }
+    },
+    "imports": [
+        {
+            "name": "hitpoint-orhanc-import",
+            "configurationPath": "@testspath/orthanc/orthanc-rest/parms-hitpoint-orthanc-rest.json",
+            "importMode": "STATIC"
+        },
+        {
+            "name": "hitpoint-orhanc-import",
+            "configurationPath": "@testspath/orthanc/orthanc-rest/parms-iterators-orthanc-rest-few.json",
+            "importMode": "STATIC"
+        }
+    ],
+    "exports": [
+        {
+            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-export-patientIds",
+            "exportAs": "patientIds",
+            "exportOrigin": "TEST",
+            "exportSource": "_v_Reply",
+            "exportTarget": ".",
+            "exportWhen": "EXBEFORESUBS"
+        }
+    ],
+    "subs": [
+        {
+            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients",
+            "runnable": true,
+            "expectSuccess": true,
+            "module": "@cmppath/common-test/iterator-test",
+            "constructorName": "IteratorTest_Constructor",
+            "methodName": "pF_Iterator",
+            "scheduleSubs": "SERIES",
+            "parms": {
+                "iterator": {
+                    "rangeParm": "patientIds",
+                    "eachParm":  "patientId",
+                    "endidx":    "~patientsiterator.limit"
+                }
+            },
+            "subs": [
+                {
+                    "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient",
+                    "runnable": true,
+                    "expectSuccess": true,
+                    "module": "@cmppath/common-test/requestreply-test",
+                    "constructorName": "RequestReply_Constructor",
+                    "methodName": "pF_RequestReply",
+                    "scheduleSubs": "SERIES",
+                    "parms": {
+                        "requestreply": {
+                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                            "requestmethod": "GET",
+                            "URLpath": "/patients",
+                            "URLparms": null,
+                            "URLparmsnotencoded": null,
+                            "URLpathParms": {
+                                "patient":  "~patientId"
+                            },
+                            "statuscode": 200,
+                            "dumpurl":                true,
+                            "UNUSED_dumprequestdata": true,
+                            "UNUSED_dumpreply":       true
+                        }
+                    },
+                    "checks": [
+                        {
+                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-check-ID-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.ID",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-check-ID-patientId",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "EQ",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.ID",
+                            "checkValue": "~patientId"
+                        }
+                    ],
+                    "exports": [
+                        {
+                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-export-patient",
+                            "exportAs": "aPatient",
+                            "exportOrigin": "TEST",
+                            "exportSource": "_v_Reply",
+                            "exportTarget": ".",
+                            "exportWhen": "EXBEFORESUBS"
+                        }
+                    ],
+                    "subs": [
+                        {
+                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies",
+                            "runnable": true,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/iterator-test",
+                            "constructorName": "IteratorTest_Constructor",
+                            "methodName": "pF_Iterator",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "iterator": {
+                                    "rangeParm": "~aPatient.Studies",
+                                    "eachParm":  "patientStudyId",
+                                    "endidx":    "~patientstudiesiterator.limit"
+                                }
+                            },
+                            "subs": [
+                                {
+                                    "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study",
+                                    "runnable": true,
+                                    "expectSuccess": true,
+                                    "module": "@cmppath/common-test/requestreply-test",
+                                    "constructorName": "RequestReply_Constructor",
+                                    "methodName": "pF_RequestReply",
+                                    "scheduleSubs": "SERIES",
+                                    "parms": {
+                                        "requestreply": {
+                                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                            "requestmethod": "GET",
+                                            "URLpath": "/studies",
+                                            "URLparms": null,
+                                            "URLparmsnotencoded": null,
+                                            "URLpathParms": {
+                                                "study":  "~patientStudyId"
+                                            },
+                                            "statuscode": 200,
+                                            "dumpurl":                true,
+                                            "UNUSED_dumprequestdata": true,
+                                            "UNUSED_dumpreply":       true
+                                        }
+                                    },
+                                    "exports": [
+                                        {
+                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-export-study",
+                                            "exportAs": "aStudy",
+                                            "exportOrigin": "TEST",
+                                            "exportSource": "_v_Reply",
+                                            "exportTarget": ".",
+                                            "exportWhen": "EXBEFORESUBS"
+                                        }
+                                    ],
+                                    "checks": [
+                                        {
+                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-check-ID-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.ID",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-check-ID-patientStudyId",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "EQ",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.ID",
+                                            "checkValue": "~patientStudyId"
+                                        }
+                                    ],
+                                    "subs": [
+                                        {
+                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries",
+                                            "runnable": true,
+                                            "expectSuccess": true,
+                                            "module": "@cmppath/common-test/iterator-test",
+                                            "constructorName": "IteratorTest_Constructor",
+                                            "methodName": "pF_Iterator",
+                                            "scheduleSubs": "SERIES",
+                                            "parms": {
+                                                "iterator": {
+                                                    "rangeParm": "~aStudy.Series",
+                                                    "eachParm":  "patientStudySerieId",
+                                                    "endidx":    "~patientstudyseriesiterator.limit"
+                                                }
+                                            },
+                                            "subs": [
+                                                {
+                                                    "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-serie",
+                                                    "runnable": true,
+                                                    "expectSuccess": true,
+                                                    "module": "@cmppath/common-test/requestreply-test",
+                                                    "constructorName": "RequestReply_Constructor",
+                                                    "methodName": "pF_RequestReply",
+                                                    "scheduleSubs": "SERIES",
+                                                    "parms": {
+                                                        "requestreply": {
+                                                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                                            "requestmethod": "GET",
+                                                            "URLpath": "/series",
+                                                            "URLparms": null,
+                                                            "URLparmsnotencoded": null,
+                                                            "URLpathParms": {
+                                                                "serie":  "~patientStudySerieId"
+                                                            },
+                                                            "statuscode": 200,
+                                                            "dumpurl":                true,
+                                                            "UNUSED_dumprequestdata": true,
+                                                            "UNUSED_dumpreply":       true
+                                                        }
+                                                    },
+                                                    "exports": [
+                                                        {
+                                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-serie-export-serie",
+                                                            "exportAs": "aSerie",
+                                                            "exportOrigin": "TEST",
+                                                            "exportSource": "_v_Reply",
+                                                            "exportTarget": ".",
+                                                            "exportWhen": "EXBEFORESUBS"
+                                                        }
+                                                    ],
+                                                    "checks": [
+                                                        {
+                                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-serie-check-ID-NOTNULL",
+                                                            "checkWhen": "BEFORESUBS",
+                                                            "checkNegate": false,
+                                                            "checkKind": "NOTNULL",
+                                                            "checkOrigin": "TEST",
+                                                            "checkSource": "_v_Reply.ID",
+                                                            "checkValue": null
+                                                        },
+                                                        {
+                                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-serie-check-ID-patientStudySerieId",
+                                                            "checkWhen": "BEFORESUBS",
+                                                            "checkNegate": false,
+                                                            "checkKind": "EQ",
+                                                            "checkOrigin": "TEST",
+                                                            "checkSource": "_v_Reply.ID",
+                                                            "checkValue": "~patientStudySerieId"
+                                                        }
+                                                    ],
+                                                    "subs": [
+                                                        {
+                                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-patientstudyserieinstances",
+                                                            "runnable": true,
+                                                            "expectSuccess": true,
+                                                            "module": "@cmppath/common-test/iterator-test",
+                                                            "constructorName": "IteratorTest_Constructor",
+                                                            "methodName": "pF_Iterator",
+                                                            "scheduleSubs": "SERIES",
+                                                            "parms": {
+                                                                "iterator": {
+                                                                    "rangeParm": "~aSerie.Instances",
+                                                                    "eachParm":  "patientStudySerieInstanceId",
+                                                                    "endidx":    "~patientstudyserieinstancesiterator.limit"
+                                                                }
+                                                            },
+                                                            "subs": [
+                                                                {
+                                                                    "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-patientstudyserieinstances-sub-instance",
+                                                                    "runnable": true,
+                                                                    "expectSuccess": true,
+                                                                    "module": "@cmppath/common-test/requestreply-test",
+                                                                    "constructorName": "RequestReply_Constructor",
+                                                                    "methodName": "pF_RequestReply",
+                                                                    "scheduleSubs": "SERIES",
+                                                                    "parms": {
+                                                                        "requestreply": {
+                                                                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                                                            "requestmethod": "GET",
+                                                                            "URLpath": "/instances",
+                                                                            "URLparms": null,
+                                                                            "URLparmsnotencoded": null,
+                                                                            "URLpathParms": {
+                                                                                "instance":  "~patientStudySerieInstanceId"
+                                                                            },
+                                                                            "statuscode": 200,
+                                                                            "dumpurl":                true,
+                                                                            "UNUSED_dumprequestdata": true,
+                                                                            "UNUSED_dumpreply":       true
+                                                                        }
+                                                                    },
+                                                                    "exports": [
+                                                                        {
+                                                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-patientstudyserieinstances-sub-instance-export-instance",
+                                                                            "exportAs": "aSerie",
+                                                                            "exportOrigin": "TEST",
+                                                                            "exportSource": "_v_Reply",
+                                                                            "exportTarget": ".",
+                                                                            "exportWhen": "EXBEFORESUBS"
+                                                                        }
+                                                                    ],
+                                                                    "checks": [
+                                                                        {
+                                                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-patientstudyserieinstances-sub-instance-check-ID-NOTNULL",
+                                                                            "checkWhen": "BEFORESUBS",
+                                                                            "checkNegate": false,
+                                                                            "checkKind": "NOTNULL",
+                                                                            "checkOrigin": "TEST",
+                                                                            "checkSource": "_v_Reply.ID",
+                                                                            "checkValue": null
+                                                                        },
+                                                                        {
+                                                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-patientstudyserieinstances-sub-instance-check-ID-patientStudySerieInstanceId",
+                                                                            "checkWhen": "BEFORESUBS",
+                                                                            "checkNegate": false,
+                                                                            "checkKind": "EQ",
+                                                                            "checkOrigin": "TEST",
+                                                                            "checkSource": "_v_Reply.ID",
+                                                                            "checkValue": "~patientStudySerieInstanceId"
+                                                                        }
+                                                                    ],
+                                                                    "subs": [
+                                                                        {
+                                                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-patientstudyserieinstances-sub-instance-delete",
+                                                                            "runnable": true,
+                                                                            "expectSuccess": true,
+                                                                            "module": "@cmppath/common-test/requestreply-test",
+                                                                            "constructorName": "RequestReply_Constructor",
+                                                                            "methodName": "pF_RequestReply",
+                                                                            "scheduleSubs": "SERIES",
+                                                                            "parms": {
+                                                                                "requestreply": {
+                                                                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                                                                    "requestmethod": "DELETE",
+                                                                                    "URLpath": "/instances",
+                                                                                    "URLparms": null,
+                                                                                    "URLparmsnotencoded": null,
+                                                                                    "URLpathParms": {
+                                                                                        "instance":  "~patientStudySerieInstanceId"
+                                                                                    },
+                                                                                    "statuscode": 200,
+                                                                                    "forgivablestatuscodes": [ 400],
+                                                                                    "dumpurl":                true,
+                                                                                    "UNUSED_dumprequestdata": true,
+                                                                                    "dumpreply":       true
+                                                                                }
+                                                                            },
+                                                                            "subs": [
+                                                                                {
+                                                                                    "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-patientstudyserieinstances-sub-instance-delete-sub-mustnotexistsafterdelete",
+                                                                                    "runnable": true,
+                                                                                    "expectSuccess": true,
+                                                                                    "module": "@cmppath/common-test/requestreply-test",
+                                                                                    "constructorName": "RequestReply_Constructor",
+                                                                                    "methodName": "pF_RequestReply",
+                                                                                    "scheduleSubs": "SERIES",
+                                                                                    "parms": {
+                                                                                        "requestreply": {
+                                                                                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                                                                            "requestmethod": "GET",
+                                                                                            "URLpath": "/instances",
+                                                                                            "URLparms": null,
+                                                                                            "URLparmsnotencoded": null,
+                                                                                            "URLpathParms": {
+                                                                                                "instance":  "~patientStudySerieInstanceId"
+                                                                                            },
+                                                                                            "statuscode": 404,
+                                                                                            "forgivablestatuscodes": [ 400],
+                                                                                            "dumpurl":                true,
+                                                                                            "UNUSED_dumprequestdata": true,
+                                                                                            "UNUSED_dumpreply":       true
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-serie-sub-delete",
+                                                            "runnable": false,
+                                                            "expectSuccess": true,
+                                                            "module": "@cmppath/common-test/requestreply-test",
+                                                            "constructorName": "RequestReply_Constructor",
+                                                            "methodName": "pF_RequestReply",
+                                                            "scheduleSubs": "SERIES",
+                                                            "parms": {
+                                                                "requestreply": {
+                                                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                                                    "requestmethod": "DELETE",
+                                                                    "URLpath": "/series",
+                                                                    "URLparms": null,
+                                                                    "URLparmsnotencoded": null,
+                                                                    "URLpathParms": {
+                                                                        "serie":  "~patientStudySerieId"
+                                                                    },
+                                                                    "statuscode": 200,
+                                                                    "forgivablestatuscodes": [ 400],
+                                                                    "dumpurl":                true,
+                                                                    "UNUSED_dumprequestdata": true,
+                                                                    "UNUSED_dumpreply":       true
+                                                                }
+                                                            },
+                                                            "subs": [
+                                                                {
+                                                                    "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-patientstudyseries-sub-serie-sub-delete-sub-mustnotexistsafterdelete",
+                                                                    "runnable": false,
+                                                                    "expectSuccess": true,
+                                                                    "module": "@cmppath/common-test/requestreply-test",
+                                                                    "constructorName": "RequestReply_Constructor",
+                                                                    "methodName": "pF_RequestReply",
+                                                                    "scheduleSubs": "SERIES",
+                                                                    "parms": {
+                                                                        "requestreply": {
+                                                                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                                                            "requestmethod": "GET",
+                                                                            "URLpath": "/series",
+                                                                            "URLparms": null,
+                                                                            "URLparmsnotencoded": null,
+                                                                            "URLpathParms": {
+                                                                                "serie":  "~patientStudySerieId"
+                                                                            },
+                                                                            "statuscode": 404,
+                                                                            "forgivablestatuscodes": [ 400],
+                                                                            "dumpurl":                true,
+                                                                            "UNUSED_dumprequestdata": true,
+                                                                            "UNUSED_dumpreply":       true
+                                                                        }
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-delete",
+                                            "runnable": false,
+                                            "expectSuccess": true,
+                                            "module": "@cmppath/common-test/requestreply-test",
+                                            "constructorName": "RequestReply_Constructor",
+                                            "methodName": "pF_RequestReply",
+                                            "scheduleSubs": "SERIES",
+                                            "parms": {
+                                                "requestreply": {
+                                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                                    "requestmethod": "DELETE",
+                                                    "URLpath": "/studies",
+                                                    "URLparms": null,
+                                                    "URLparmsnotencoded": null,
+                                                    "URLpathParms": {
+                                                        "study":  "~patientStudyId"
+                                                    },
+                                                    "statuscode": 200,
+                                                    "forgivablestatuscodes": [ 400],
+                                                    "dumpurl":                true,
+                                                    "UNUSED_dumprequestdata": true,
+                                                    "UNUSED_dumpreply":       true
+                                                }
+                                            },
+                                            "subs": [
+                                                {
+                                                    "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-patientstudies-sub-study-sub-delete-sub-mustnotexistsafterdelete",
+                                                    "runnable": false,
+                                                    "expectSuccess": true,
+                                                    "module": "@cmppath/common-test/requestreply-test",
+                                                    "constructorName": "RequestReply_Constructor",
+                                                    "methodName": "pF_RequestReply",
+                                                    "scheduleSubs": "SERIES",
+                                                    "parms": {
+                                                        "requestreply": {
+                                                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                                            "requestmethod": "GET",
+                                                            "URLpath": "/studies",
+                                                            "URLparms": null,
+                                                            "URLparmsnotencoded": null,
+                                                            "URLpathParms": {
+                                                                "study":  "~patientStudyId"
+                                                            },
+                                                            "statuscode": 404,
+                                                            "forgivablestatuscodes": [ 400],
+                                                            "dumpurl":                true,
+                                                            "UNUSED_dumprequestdata": true,
+                                                            "UNUSED_dumpreply":       true
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-delete",
+                            "runnable": false,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/requestreply-test",
+                            "constructorName": "RequestReply_Constructor",
+                            "methodName": "pF_RequestReply",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "requestreply": {
+                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                    "requestmethod": "DELETE",
+                                    "URLpath": "/patients",
+                                    "URLparms": null,
+                                    "URLparmsnotencoded": null,
+                                    "URLpathParms": {
+                                        "patient":  "~patientId"
+                                    },
+                                    "statuscode": 200,
+                                    "forgivablestatuscodes": [ 400],
+                                    "dumpurl":                true,
+                                    "UNUSED_dumprequestdata": true,
+                                    "UNUSED_dumpreply":       true
+                                }
+                            },
+                            "subs": [
+                                {
+                                    "name": "suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test-sub-iteratorpatients-sub-patient-sub-delete-mustnotexistsafterdelete",
+                                    "runnable": false,
+                                    "expectSuccess": true,
+                                    "module": "@cmppath/common-test/requestreply-test",
+                                    "constructorName": "RequestReply_Constructor",
+                                    "methodName": "pF_RequestReply",
+                                    "scheduleSubs": "SERIES",
+                                    "parms": {
+                                        "requestreply": {
+                                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                            "requestmethod": "GET",
+                                            "URLpath": "/patients",
+                                            "URLparms": null,
+                                            "URLparmsnotencoded": null,
+                                            "URLpathParms": {
+                                                "patient":  "~patientId"
+                                            },
+                                            "statuscode": 404,
+                                            "forgivablestatuscodes": [ 400],
+                                            "dumpurl":                true,
+                                            "UNUSED_dumprequestdata": true,
+                                            "UNUSED_dumpreply":       true
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+

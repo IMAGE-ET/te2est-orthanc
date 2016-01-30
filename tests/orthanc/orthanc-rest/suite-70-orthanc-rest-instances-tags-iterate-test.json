@@ -1,0 +1,975 @@
+{
+    "name": "suite-70-orthanc-rest-instances-tags-iterate-test",
+    "runnable": true,
+    "expectSuccess": true,
+    "module": "@cmppath/common-test/requestreply-test",
+    "constructorName": "RequestReply_Constructor",
+    "methodName": "pF_RequestReply",
+    "scheduleSubs": "SERIES",
+    "parms": {
+        "salutation": "Hello suite-70-orthanc-rest-instances-tags-iterate-test. You are using te2est asyncshell written in Javascript. Copyright 2014 2015 Antonio Carrasco Valero {{CopyrightNoticeJSON2}} Licensed under the EUPL, Version 1.1 only (the 'Licence'); You may not use this work except in compliance with the Licence. You may obtain a copy of the Licence at: https://joinup.ec.europa.eu/software/page/eupl/licence-eupl Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an 'AS IS' basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the Licence for the specific language governing permissions and limitations under the Licence.  {{LicenseJSON2}}  {{LicensedJSON1}} {{LicensedJSON2}}",
+        "requestreply": {
+            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+            "requestmethod": "GET",
+            "URLpath": "/instances",
+            "URLparms": {
+                "limit": "~instancesiterator.limit"
+            },
+            "URLparmsnotencoded": null,
+            "URLpathParms": null,
+            "statuscode": 200,
+            "dumpurl":                true,
+            "UNUSED_dumprequestdata": true,
+            "UNUSED_dumpreply":       true
+        }
+    },
+    "imports": [
+        {
+            "name": "hitpoint-orhanc-import",
+            "configurationPath": "@testspath/orthanc/orthanc-rest/parms-hitpoint-orthanc-rest.json",
+            "importMode": "STATIC"
+        },
+        {
+            "name": "hitpoint-orhanc-import",
+            "configurationPath": "@testspath/orthanc/orthanc-rest/parms-iterators-orthanc-rest-few.json",
+            "importMode": "STATIC"
+        }
+    ],
+    "exports": [
+        {
+            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-export-instanceIds",
+            "exportAs": "instanceIds",
+            "exportOrigin": "TEST",
+            "exportSource": "_v_Reply",
+            "exportTarget": ".",
+            "exportWhen": "EXBEFORESUBS"
+        }
+    ],
+    "subs": [
+        {
+            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances",
+            "runnable": true,
+            "expectSuccess": true,
+            "module": "@cmppath/common-test/iterator-test",
+            "constructorName": "IteratorTest_Constructor",
+            "methodName": "pF_Iterator",
+            "scheduleSubs": "SERIES",
+            "parms": {
+                "iterator": {
+                    "rangeParm": "~instanceIds",
+                    "eachParm":  "instanceId",
+                    "endidx":    "~instancesiterator.limit"
+                }
+            },
+            "subs": [
+                {
+                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance",
+                    "runnable": true,
+                    "expectSuccess": true,
+                    "module": "@cmppath/common-test/requestreply-test",
+                    "constructorName": "RequestReply_Constructor",
+                    "methodName": "pF_RequestReply",
+                    "scheduleSubs": "SERIES",
+                    "parms": {
+                        "requestreply": {
+                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                            "requestmethod": "GET",
+                            "URLpath": "/instances",
+                            "URLparms": null,
+                            "URLparmsnotencoded": null,
+                            "URLpathParms": {
+                                "instance":  "~instanceId"
+                            },
+                            "statuscode": 200,
+                            "dumpurl":                true,
+                            "UNUSED_dumprequestdata": true,
+                            "UNUSED_dumpreply":       true
+                        }
+                    },
+                    "exports": [
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-export-instance",
+                            "exportAs": "anInstance",
+                            "exportOrigin": "TEST",
+                            "exportSource": "_v_Reply",
+                            "exportTarget": ".",
+                            "exportWhen": "EXBEFORESUBS"
+                        }
+                    ],
+                    "checks": [
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-check-ID-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.ID",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-check-ID-instanceId",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "EQ",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.ID",
+                            "checkValue": "~instanceId"
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-check-FileSize",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "GTE",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.FileSize",
+                            "checkValue": 0
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-check-FileUuid-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.FileUuid",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-check-IndexInSeries",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "GTE",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.IndexInSeries",
+                            "checkValue": 0
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-check-MainDicomTags-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.MainDicomTags",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-check-MainDicomTags.InstanceNumber-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.MainDicomTags.InstanceNumber",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-check-MainDicomTags.SOPInstanceUID-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.MainDicomTags.SOPInstanceUID",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-check-ParentSeries",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.ParentSeries",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-check-Type-Instance",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "EQ",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.Type",
+                            "checkValue": "Instance"
+                        }
+                    ],
+                    "subs": [
+
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-tags",
+                            "runnable": true,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/requestreply-test",
+                            "constructorName": "RequestReply_Constructor",
+                            "methodName": "pF_RequestReply",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "requestreply": {
+                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                    "requestmethod": "GET",
+                                    "URLpath": "/instances",
+                                    "URLparms": null,
+                                    "URLparmsnotencoded": null,
+                                    "URLpathParms": {
+                                        "instance":  "~instanceId",
+                                        "file":   "tags"
+                                    },
+                                    "statuscode": 200,
+                                    "forgivablestatuscodes": [ 404],
+                                    "dumpurl":                true,
+                                    "UNUSED_dumprequestdata": true,
+                                    "dumpreply":       true
+                                }
+                            }
+                        },
+                        
+                        
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-file-expecthttpnotfound",
+                            "runnable": true,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/requestreply-test",
+                            "constructorName": "RequestReply_Constructor",
+                            "methodName": "pF_RequestReply",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "requestreply": {
+                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                    "requestmethod": "GET",
+                                    "URLpath": "/file",
+                                    "URLparms": null,
+                                    "URLparmsnotencoded": null,
+                                    "URLpathParms": {
+                                        "instance":  "~instanceId",
+                                        "file":   "file"
+                                    },
+                                    "statuscode": 200,
+                                    "forgivablestatuscodes": [ 404],
+                                    "dumpurl":                true,
+                                    "UNUSED_dumprequestdata": true,
+                                    "UNUSED_dumpreply":       true
+                                }
+                            }
+                        },
+                        
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-module-expecthttpnotfound",
+                            "runnable": true,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/requestreply-test",
+                            "constructorName": "RequestReply_Constructor",
+                            "methodName": "pF_RequestReply",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "requestreply": {
+                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                    "requestmethod": "GET",
+                                    "URLpath": "/instances",
+                                    "URLparms": null,
+                                    "URLparmsnotencoded": null,
+                                    "URLpathParms": {
+                                        "instance":  "~instanceId",
+                                        "module":   "module"
+                                    },
+                                    "statuscode": 200,
+                                    "forgivablestatuscodes": [ 404],
+                                    "dumpurl":                true,
+                                    "UNUSED_dumprequestdata": true,
+                                    "UNUSED_dumpreply":       true
+                                }
+                            }
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-patient-expecthttpnotfound",
+                            "runnable": true,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/requestreply-test",
+                            "constructorName": "RequestReply_Constructor",
+                            "methodName": "pF_RequestReply",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "requestreply": {
+                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                    "requestmethod": "GET",
+                                    "URLpath": "/instances",
+                                    "URLparms": null,
+                                    "URLparmsnotencoded": null,
+                                    "URLpathParms": {
+                                        "instance":  "~instanceId",
+                                        "patient":   "patient"
+                                    },
+                                    "statuscode": 200,
+                                    "forgivablestatuscodes": [ 404],
+                                    "dumpurl":                true,
+                                    "UNUSED_dumprequestdata": true,
+                                    "UNUSED_dumpreply":       true
+                                }
+                            }
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-series-expecthttpnotfound",
+                            "runnable": true,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/requestreply-test",
+                            "constructorName": "RequestReply_Constructor",
+                            "methodName": "pF_RequestReply",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "requestreply": {
+                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                    "requestmethod": "GET",
+                                    "URLpath": "/instances",
+                                    "URLparms": null,
+                                    "URLparmsnotencoded": null,
+                                    "URLpathParms": {
+                                        "instance":  "~instanceId",
+                                        "series":   "series"
+                                    },
+                                    "statuscode": 200,
+                                    "forgivablestatuscodes": [ 404],
+                                    "dumpurl":                true,
+                                    "UNUSED_dumprequestdata": true,
+                                    "UNUSED_dumpreply":       true
+                                }
+                            }
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-study-expecthttpnotfound",
+                            "runnable": true,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/requestreply-test",
+                            "constructorName": "RequestReply_Constructor",
+                            "methodName": "pF_RequestReply",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "requestreply": {
+                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                    "requestmethod": "GET",
+                                    "URLpath": "/instances",
+                                    "URLparms": null,
+                                    "URLparmsnotencoded": null,
+                                    "URLpathParms": {
+                                        "instance":  "~instanceId",
+                                        "study":   "study"
+                                    },
+                                    "statuscode": 200,
+                                    "forgivablestatuscodes": [ 404],
+                                    "dumpurl":                true,
+                                    "UNUSED_dumprequestdata": true,
+                                    "UNUSED_dumpreply":       true
+                                }
+                            }
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-simplified_tags",
+                            "runnable": true,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/requestreply-test",
+                            "constructorName": "RequestReply_Constructor",
+                            "methodName": "pF_RequestReply",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "requestreply": {
+                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                    "requestmethod": "GET",
+                                    "URLpath": "/instances",
+                                    "URLparms": null,
+                                    "URLparmsnotencoded": null,
+                                    "URLpathParms": {
+                                        "instance":  "~instanceId",
+                                        "simplified-tags":   "simplified-tags"
+                                    },
+                                    "statuscode": 200,
+                                    "dumpurl":                true,
+                                    "UNUSED_dumprequestdata": true,
+                                    "UNUSED_dumpreply":       true
+                                }
+                            }
+                        },
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-statistics",
+                            "runnable": true,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/requestreply-test",
+                            "constructorName": "RequestReply_Constructor",
+                            "methodName": "pF_RequestReply",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "requestreply": {
+                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                    "requestmethod": "GET",
+                                    "URLpath": "/instances",
+                                    "URLparms": null,
+                                    "URLparmsnotencoded": null,
+                                    "URLpathParms": {
+                                        "instance":  "~instanceId",
+                                        "statistics":   "statistics"
+                                    },
+                                    "statuscode": 200,
+                                    "dumpurl":                true,
+                                    "UNUSED_dumprequestdata": true,
+                                    "UNUSED_dumpreply":       true
+                                }
+                            },
+                            "checks": [
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-statistics-check-_v_Reply-CountInstances",
+                                    "checkWhen": "AFTER",
+                                    "checkNegate": false,
+                                    "checkKind": "GTE",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.CountInstances",
+                                    "checkValue": 0
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-statistics-check-_v_Reply-CountSeries",
+                                    "checkWhen": "AFTER",
+                                    "checkNegate": false,
+                                    "checkKind": "GTE",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.CountSeries",
+                                    "checkValue": 0
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-statistics-check-_v_Reply-CountStudies",
+                                    "checkWhen": "AFTER",
+                                    "checkNegate": false,
+                                    "checkKind": "GTE",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.CountStudies",
+                                    "checkValue": 0
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-statistics-check-_v_Reply-DiskSize",
+                                    "checkWhen": "AFTER",
+                                    "checkNegate": false,
+                                    "checkKind": "GTE",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.DiskSize",
+                                    "checkValue": "0"
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-statistics-check-_v_Reply-DiskSizeMB",
+                                    "checkWhen": "AFTER",
+                                    "checkNegate": false,
+                                    "checkKind": "GTE",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.DiskSizeMB",
+                                    "checkValue": 0
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-statistics-check-_v_Reply-UncompressedSize",
+                                    "checkWhen": "AFTER",
+                                    "checkNegate": false,
+                                    "checkKind": "GTE",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.UncompressedSize",
+                                    "checkValue": "0"
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-statistics-check-_v_Reply-UncompressedSizeMB",
+                                    "checkWhen": "AFTER",
+                                    "checkNegate": false,
+                                    "checkKind": "GTE",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.UncompressedSizeMB",
+                                    "checkValue": 0
+                                }
+                            ]
+                        },
+
+                        {
+                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie",
+                            "runnable": true,
+                            "expectSuccess": true,
+                            "module": "@cmppath/common-test/requestreply-test",
+                            "constructorName": "RequestReply_Constructor",
+                            "methodName": "pF_RequestReply",
+                            "scheduleSubs": "SERIES",
+                            "parms": {
+                                "requestreply": {
+                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                    "requestmethod": "GET",
+                                    "URLpath": "/series",
+                                    "URLparms": null,
+                                    "URLparmsnotencoded": null,
+                                    "URLpathParms": {
+                                        "serie":  "~anInstance.ParentSeries"
+                                    },
+                                    "statuscode": 200,
+                                    "dumpurl":                true,
+                                    "UNUSED_dumprequestdata": true,
+                                    "UNUSED_dumpreply":       true
+                                }
+                            },
+                            "exports": [
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-export-serie",
+                                    "exportAs": "aSerie",
+                                    "exportOrigin": "TEST",
+                                    "exportSource": "_v_Reply",
+                                    "exportTarget": ".",
+                                    "exportWhen": "EXBEFORESUBS"
+                                }
+                            ],
+                            "checks": [
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-ID-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.ID",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-ID-anInstance.ParentSeries",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "EQ",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.ID",
+                                    "checkValue": "~anInstance.ParentSeries"
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-IsStable-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.IsStable",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-MainDicomTags-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-NEVER-MainDicomTags.BodyPartExamined-NOTNULL",
+                                    "checkWhen": "NEVER",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.BodyPartExamined",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-MainDicomTags.Manufacturer-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.Manufacturer",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-MainDicomTags.Modality-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.Modality",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-NEVER-MainDicomTags.ProtocolName-NOTNULL",
+                                    "checkWhen": "NEVER",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.ProtocolName",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-MainDicomTags.SeriesDate-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.SeriesDate",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-MainDicomTags.SeriesDescription-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.SeriesDescription",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-MainDicomTags.SeriesInstanceUID-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.SeriesInstanceUID",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-MainDicomTags.SeriesNumber-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.SeriesNumber",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-MainDicomTags.SeriesNumber-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.SeriesNumber",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-MainDicomTags.SeriesTime-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.SeriesTime",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-NEVER-MainDicomTags.StationName-NOTNULL",
+                                    "checkWhen": "NEVER",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.MainDicomTags.StationName",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-ParentStudy-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.ParentStudy",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-Instances-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.Instances",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-Status-NOTNULL",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "NOTNULL",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.Status",
+                                    "checkValue": null
+                                },
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-check-Type-Series",
+                                    "checkWhen": "BEFORESUBS",
+                                    "checkNegate": false,
+                                    "checkKind": "EQ",
+                                    "checkOrigin": "TEST",
+                                    "checkSource": "_v_Reply.Type",
+                                    "checkValue": "Series"
+                                }
+                            ],
+                            "subs": [
+                                {
+                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study",
+                                    "runnable": true,
+                                    "expectSuccess": true,
+                                    "module": "@cmppath/common-test/requestreply-test",
+                                    "constructorName": "RequestReply_Constructor",
+                                    "methodName": "pF_RequestReply",
+                                    "scheduleSubs": "SERIES",
+                                    "parms": {
+                                        "requestreply": {
+                                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                            "requestmethod": "GET",
+                                            "URLpath": "/studies",
+                                            "URLparms": null,
+                                            "URLparmsnotencoded": null,
+                                            "URLpathParms": {
+                                                "study":  "~aSerie.ParentStudy"
+                                            },
+                                            "statuscode": 200,
+                                            "dumpurl":                true,
+                                            "UNUSED_dumprequestdata": true,
+                                            "UNUSED_dumpreply":       true
+                                        }
+                                    },
+                                    "exports": [
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-export-study",
+                                            "exportAs": "aStudy",
+                                            "exportOrigin": "TEST",
+                                            "exportSource": "_v_Reply",
+                                            "exportTarget": ".",
+                                            "exportWhen": "EXBEFORESUBS"
+                                        }
+                                    ],
+                                    "checks": [
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-ID-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.ID",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-ID-studyId",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "EQ",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.ID",
+                                            "checkValue": "~aSerie.ParentStudy"
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-IsStable-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.IsStable",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-MainDicomTags-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.MainDicomTags",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-MainDicomTags.AccessionNumber-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.MainDicomTags.AccessionNumber",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-MainDicomTags.StudyDate-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.MainDicomTags.StudyDate",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-MainDicomTags.StudyDescription-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.MainDicomTags.StudyDescription",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-MainDicomTags.StudyID-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.MainDicomTags.StudyID",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-MainDicomTags.StudyInstanceUID-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.MainDicomTags.StudyInstanceUID",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-MainDicomTags.StudyTime-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.MainDicomTags.StudyTime",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-ParentPatient-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.ParentPatient",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-Series-NOTNULL",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "NOTNULL",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.Series",
+                                            "checkValue": null
+                                        },
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-check-Type-Series",
+                                            "checkWhen": "BEFORESUBS",
+                                            "checkNegate": false,
+                                            "checkKind": "EQ",
+                                            "checkOrigin": "TEST",
+                                            "checkSource": "_v_Reply.Type",
+                                            "checkValue": "Study"
+                                        }
+                                    ],
+                                    "subs": [
+                                        {
+                                            "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient",
+                                            "runnable": true,
+                                            "expectSuccess": true,
+                                            "module": "@cmppath/common-test/requestreply-test",
+                                            "constructorName": "RequestReply_Constructor",
+                                            "methodName": "pF_RequestReply",
+                                            "scheduleSubs": "SERIES",
+                                            "parms": {
+                                                "requestreply": {
+                                                    "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                                                    "requestmethod": "GET",
+                                                    "URLpath": "/patients",
+                                                    "URLparms": null,
+                                                    "URLparmsnotencoded": null,
+                                                    "URLpathParms": {
+                                                        "patient":  "~aStudy.ParentPatient"
+                                                    },
+                                                    "statuscode": 200,
+                                                    "dumpurl":                true,
+                                                    "UNUSED_dumprequestdata": true,
+                                                    "UNUSED_dumpreply":       true
+                                                }
+                                            },
+                                            "checks": [
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-check-ID-NOTNULL",
+                                                    "checkWhen": "BEFORESUBS",
+                                                    "checkNegate": false,
+                                                    "checkKind": "NOTNULL",
+                                                    "checkOrigin": "TEST",
+                                                    "checkSource": "_v_Reply.ID",
+                                                    "checkValue": null
+                                                },
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-check-ID-patientId",
+                                                    "checkWhen": "BEFORESUBS",
+                                                    "checkNegate": false,
+                                                    "checkKind": "EQ",
+                                                    "checkOrigin": "TEST",
+                                                    "checkSource": "_v_Reply.ID",
+                                                    "checkValue": "~aStudy.ParentPatient"
+                                                },
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-check-IsStable-NOTNULL",
+                                                    "checkWhen": "BEFORESUBS",
+                                                    "checkNegate": false,
+                                                    "checkKind": "NOTNULL",
+                                                    "checkOrigin": "TEST",
+                                                    "checkSource": "_v_Reply.IsStable",
+                                                    "checkValue": null
+                                                },
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-check-MainDicomTags-NOTNULL",
+                                                    "checkWhen": "BEFORESUBS",
+                                                    "checkNegate": false,
+                                                    "checkKind": "NOTNULL",
+                                                    "checkOrigin": "TEST",
+                                                    "checkSource": "_v_Reply.MainDicomTags",
+                                                    "checkValue": null
+                                                },
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-check-MainDicomTags.PatientBirthDate-NOTNULL",
+                                                    "checkWhen": "BEFORESUBS",
+                                                    "checkNegate": false,
+                                                    "checkKind": "NOTNULL",
+                                                    "checkOrigin": "TEST",
+                                                    "checkSource": "_v_Reply.MainDicomTags.PatientBirthDate",
+                                                    "checkValue": null
+                                                },
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-check-MainDicomTags.PatientID-NOTNULL",
+                                                    "checkWhen": "BEFORESUBS",
+                                                    "checkNegate": false,
+                                                    "checkKind": "NOTNULL",
+                                                    "checkOrigin": "TEST",
+                                                    "checkSource": "_v_Reply.MainDicomTags.PatientID",
+                                                    "checkValue": null
+                                                },
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-check-MainDicomTags.PatientName-NOTNULL",
+                                                    "checkWhen": "BEFORESUBS",
+                                                    "checkNegate": false,
+                                                    "checkKind": "NOTNULL",
+                                                    "checkOrigin": "TEST",
+                                                    "checkSource": "_v_Reply.MainDicomTags.PatientName",
+                                                    "checkValue": null
+                                                },
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-check-MainDicomTags.PatientSex-NOTNULL",
+                                                    "checkWhen": "BEFORESUBS",
+                                                    "checkNegate": false,
+                                                    "checkKind": "NOTNULL",
+                                                    "checkOrigin": "TEST",
+                                                    "checkSource": "_v_Reply.MainDicomTags.PatientSex",
+                                                    "checkValue": null
+                                                },
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-check-Studies-NOTNULL",
+                                                    "checkWhen": "BEFORESUBS",
+                                                    "checkNegate": false,
+                                                    "checkKind": "NOTNULL",
+                                                    "checkOrigin": "TEST",
+                                                    "checkSource": "_v_Reply.Studies",
+                                                    "checkValue": null
+                                                },
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-check-Type-Patient",
+                                                    "checkWhen": "BEFORESUBS",
+                                                    "checkNegate": false,
+                                                    "checkKind": "EQ",
+                                                    "checkOrigin": "TEST",
+                                                    "checkSource": "_v_Reply.Type",
+                                                    "checkValue": "Patient"
+                                                }
+                                            ],
+                                            "exports": [
+                                                {
+                                                    "name": "suite-70-orthanc-rest-instances-tags-iterate-test-sub-iteratorinstances-sub-instance-sub-serie-sub-study-sub-patient-export-patient",
+                                                    "exportAs": "aPatient",
+                                                    "exportOrigin": "TEST",
+                                                    "exportSource": "_v_Reply",
+                                                    "exportTarget": ".",
+                                                    "exportWhen": "EXBEFORESUBS"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+

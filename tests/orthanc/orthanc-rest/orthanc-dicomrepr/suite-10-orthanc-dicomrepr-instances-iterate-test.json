@@ -1,0 +1,309 @@
+{
+    "name": "suite-10-orthanc-dicomrepr-instances-iterate-test",
+    "runnable": true,
+    "expectSuccess": true,
+    "module": "@cmppath/common-test/requestreply-test",
+    "constructorName": "RequestReply_Constructor",
+    "methodName": "pF_RequestReply",
+    "scheduleSubs": "SERIES",
+    "parms": {
+        "salutation": "Hello suite-10-orthanc-dicomrepr-instances-iterate-test. You are using te2est asyncshell written in Javascript. Copyright 2014 2015 Antonio Carrasco Valero {{CopyrightNoticeJSON2}} Licensed under the EUPL, Version 1.1 only (the 'Licence'); You may not use this work except in compliance with the Licence. You may obtain a copy of the Licence at: https://joinup.ec.europa.eu/software/page/eupl/licence-eupl Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an 'AS IS' basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the Licence for the specific language governing permissions and limitations under the Licence.  {{LicenseJSON2}}  {{LicensedJSON1}} {{LicensedJSON2}}",
+        "requestreply": {
+            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+            "requestmethod": "GET",
+            "URLpath": "/instances",
+            "URLparms": {
+                "limit": "~instancesiterator.limit"
+            },
+            "URLparmsnotencoded": null,
+            "URLpathParms": null,
+            "statuscode": 200,
+            "dumpurl":                true,
+            "UNUSED_dumprequestdata": true,
+            "dumpreply":       true
+        }
+    },
+    "imports": [
+        {
+            "name": "hitpoint-orhanc-import",
+            "configurationPath": "@testspath/orthanc/orthanc-rest/parms-hitpoint-orthanc-rest.json",
+            "importMode": "STATIC"
+        },
+        {
+            "name": "hitpoint-orhanc-import",
+            "configurationPath": "@testspath/orthanc/orthanc-rest/parms-iterators-orthanc-rest-few.json",
+            "importMode": "STATIC"
+        }
+    ],
+    "exports": [
+        {
+            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-export-instanceIds",
+            "exportAs": "instanceIds",
+            "exportOrigin": "TEST",
+            "exportSource": "_v_Reply",
+            "exportTarget": ".",
+            "exportWhen": "EXBEFORESUBS"
+        }
+    ],
+    "subs": [
+        {
+            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances",
+            "runnable": true,
+            "expectSuccess": true,
+            "module": "@cmppath/common-test/iterator-test",
+            "constructorName": "IteratorTest_Constructor",
+            "methodName": "pF_Iterator",
+            "scheduleSubs": "SERIES",
+            "parms": {
+                "iterator": {
+                    "rangeParm": "~instanceIds",
+                    "eachParm":  "instanceId",
+                    "endidx":    "~instancesiterator.limit"
+                }
+            },
+            "subs": [
+                {
+                    "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary",
+                    "runnable": true,
+                    "expectSuccess": true,
+                    "module": "@cmppath/common-test/requestreply-test",
+                    "constructorName": "RequestReply_Constructor",
+                    "methodName": "pF_RequestReply",
+                    "scheduleSubs": "SERIES",
+                    "parms": {
+                        "requestreply": {
+                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                            "requestmethod": "GET",
+                            "URLpath": "/instances",
+                            "URLparms": null,
+                            "URLparmsnotencoded": null,
+                            "URLpathParms": {
+                                "instance":  "~instanceId"
+                            },
+                            "statuscode": 200,
+                            "dumpurl":                true,
+                            "UNUSED_dumprequestdata": true,
+                            "dumpreply":       true
+                        }
+                    },
+                    "checks": [
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary-check-ID-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.ID",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary-check-ID-instanceId",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "EQ",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.ID",
+                            "checkValue": "~instanceId"
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary-check-FileSize",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "GTE",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.FileSize",
+                            "checkValue": 0
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary-check-FileUuid-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.FileUuid",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary-check-IndexInSeries",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "GTE",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.IndexInSeries",
+                            "checkValue": 0
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary-check-MainDicomTags-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.MainDicomTags",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary-check-MainDicomTags.InstanceNumber-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.MainDicomTags.InstanceNumber",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary-check-MainDicomTags.SOPInstanceUID-NOTNULL",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.MainDicomTags.SOPInstanceUID",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary-check-ParentSeries",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTNULL",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.ParentSeries",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancesummary-check-Type-Instance",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "EQ",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply.Type",
+                            "checkValue": "Instance"
+                        }
+                    ]
+                },
+                
+                {
+                    "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancetags",
+                    "runnable": true,
+                    "expectSuccess": true,
+                    "module": "@cmppath/common-test/requestreply-test",
+                    "constructorName": "RequestReply_Constructor",
+                    "methodName": "pF_RequestReply",
+                    "scheduleSubs": "SERIES",
+                    "parms": {
+                        "requestreply": {
+                            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+                            "requestmethod": "GET",
+                            "URLpath": "/instances",
+                            "URLparms": null,
+                            "URLparmsnotencoded": null,
+                            "URLpathParms": {
+                                "instance":  "~instanceId",
+                                "tags":      "tags"
+                            },
+                            "statuscode": 200,
+                            "dumpurl":                true,
+                            "UNUSED_dumprequestdata": true,
+                            "dumpreply":       true
+                        }
+                    },
+                    "exports": [
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancetags-export-instancetags",
+                            "exportAs": "InstanceTags",
+                            "exportOrigin": "TEST",
+                            "exportSource": "_v_Reply",
+                            "exportTarget": "..",
+                            "exportWhen": "OK"
+                        }
+                    ],
+                    "checks": [
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-retrieveinstancetags-check-_v_Reply-NOTEMPTYDICT",
+                            "checkWhen": "OK",
+                            "checkNegate": false,
+                            "checkKind": "NOTEMPTYDICT",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Reply",
+                            "checkValue": null
+                        }
+                    ]
+                },
+
+
+                {
+                    "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-asdicomrepr",
+                    "runnable": true,
+                    "expectSuccess": true,
+                    "module": "@cmppath/orthanc-test/orthancrepr-test",
+                    "constructorName": "OrthancRepr_Constructor",
+                    "methodName": "pF_OrthancRepr",
+                    "scheduleSubs": "SERIES",
+                    "parms": {
+                        "orthancrepr": {
+                            "orthancSource":      "~InstanceTags",
+
+                            "implementorMatches": [
+                                "Philips\\sMR\\sImaging\\sDD\\s\\d{3}",
+                                "Philips\\sImaging\\sDD\\s\\d{3}"
+                            ],
+                            
+                            "failif_observations":     false,
+                            "failif_warnings":         false,
+                            "failif_errors":           false,
+                            "failonfirst_observation": false,
+                            "failonfirst_warning":     false,
+                            "failonfirst_error":       false,
+
+                            "dump_orthancSource":      false,
+                            "dump_implementorMatches": true,
+                            "dump_instanceUID":        true,
+                            "dump_dicomRepr":          true,
+                            "dump_observations":       true,
+                            "dump_warnings":           true,
+                            "dump_errors":             true,
+                            "dump_privateGroups":      true
+                        }
+                    },
+                    "checks": [
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-asdicomrepr-check-_v_DicomInstanceRepr-NOTEMPTYDICT",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "NOTEMPTYDICT",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_DicomInstanceRepr",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-asdicomrepr-check-_v_Errors-EMPTYLIST",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "EMPTYLIST",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Errors",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-asdicomrepr-check-_v_Warnings-EMPTYLIST",
+                            "checkWhen": "BEFORESUBS",
+                            "checkNegate": false,
+                            "checkKind": "EMPTYLIST",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Warnings",
+                            "checkValue": null
+                        },
+                        {
+                            "name": "suite-10-orthanc-dicomrepr-instances-iterate-test-sub-iteratorinstances-sub-asdicomrepr-check-_v_Observations-EMPTYLIST",
+                            "checkWhen": "NEVER",
+                            "checkNegate": false,
+                            "checkKind": "EMPTYLIST",
+                            "checkOrigin": "TEST",
+                            "checkSource": "_v_Observations",
+                            "checkValue": null
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+

@@ -1,0 +1,35 @@
+{
+    "name": "parms-iterators-orthanc-rest-few",
+    "parms": {
+        "patientsiterator": {
+            "limit": 10000
+        },
+        "patientstudiesiterator": {
+            "limit": 10000
+        },
+        "patientstudyseriesiterator": {
+            "limit": 10000
+        },
+        "patientstudyserieinstancesiterator": {
+            "limit": 10000
+        },
+        "studiesiterator": {
+            "limit": 10000
+        },
+        "studyseriesiterator":  {
+            "limit": 10000
+        },
+        "studyserieinstancesiterator":  {
+            "limit": 10000
+        },
+        "seriesiterator": {
+            "limit": 10000
+        },
+        "serieinstancesiterator": {
+            "limit": 10000
+        },
+        "instancesiterator": {
+            "limit": 10000
+        }
+    }
+}

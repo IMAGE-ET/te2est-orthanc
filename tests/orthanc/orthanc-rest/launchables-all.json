@@ -1,0 +1,40 @@
+[
+    "@testspath/orthanc/orthanc-rest/suite-01-orthanc-rest-system-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-02-orthanc-rest-tools-now-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-04-orthanc-rest-plugins-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-06-orthanc-rest-queries-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-08-orthanc-rest-statistics-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-10-orthanc-rest-modalities-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-12-orthanc-rest-peers-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-14-orthanc-rest-patients-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-16-orthanc-rest-studies-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-18-orthanc-rest-series-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-20-orthanc-rest-instances-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-22-orthanc-rest-changes-get-limit-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-24-orthanc-rest-changes-last-get-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-26-orthanc-rest-changes-get-since-limit-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-28-orthanc-rest-exports-get-test.json",
+
+    "@testspath/orthanc/orthanc-rest/suite-60-orthanc-rest-instance-post-dicom-test.json",
+
+    "@testspath/orthanc/orthanc-rest/suite-50-orthanc-rest-patients-studies-series-instances-recursivedeletedepthfirst-test.json",
+
+    "@testspath/orthanc/orthanc-rest/suite-40-orthanc-rest-patients-iterate-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-41-orthanc-rest-patients-iterate-all-test.json",
+
+    "@testspath/orthanc/orthanc-rest/suite-42-orthanc-rest-studies-iterate-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-43-orthanc-rest-studies-iterate-all-test.json",
+
+    "@testspath/orthanc/orthanc-rest/suite-44-orthanc-rest-series-iterate-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-45-orthanc-rest-series-iterate-all-test.json",
+
+    "@testspath/orthanc/orthanc-rest/suite-46-orthanc-rest-instances-iterate-test.json",
+    "@testspath/orthanc/orthanc-rest/suite-47-orthanc-rest-instances-iterate-all-test.json",
+
+    "@testspath/orthanc/orthanc-rest/suite-70-orthanc-rest-instances-tags-iterate-test.json",
+
+    "@testspath/orthanc/orthanc-rest/suite-72-orthanc-rest-instances-tags-iterate-all-test.json",
+
+    "@testspath/orthanc/orthanc-rest/orthanc-dicomrepr/launchables.json"
+
+]

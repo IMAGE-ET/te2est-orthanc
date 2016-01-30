@@ -1,0 +1,4 @@
+[
+    "@testspath/orthanc/orthanc-rest/orthanc-dicomrepr/suite-10-orthanc-dicomrepr-instances-iterate-test.json",
+    "@testspath/orthanc/orthanc-rest/orthanc-dicomrepr/suite-11-orthanc-dicomrepr-instances-iterate-all-test.json"
+]

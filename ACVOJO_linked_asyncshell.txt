@@ -1,0 +1,11 @@
+cd ~/Works/MDD/asyncshell/SVNs_asyncshell/asyncshell_pub/asyncshell
+npm link
+# stdout
+# /home/acv/.nvm/versions/node/v4.2.4/lib/node_modules/asyncshell -> /home/acv/Works/MDD/asyncshell/SVNs_asyncshell/asyncshell_pub/asyncshell
+
+
+
+cd ~/Works/MDD/te2est-springnut/SVNs_te2est-springnut/te2est-springnut_first/te2est-springnut
+npm link asyncshell
+
+

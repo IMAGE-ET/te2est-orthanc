@@ -1,0 +1,56 @@
+{
+  "name": "te2est-springnut",
+  "version": "0.1.0",
+  "description": "End-to-end test of SpringNut example application JSON API and AngularJS user interface, using the asyncshell nodejs tool.",
+  "keywords": [
+    "end2end",
+    "asynchronous",
+    "async",
+    "test",
+    "testing",
+    "API",
+    "JSON",
+    "angular",
+    "protractor",
+    "jasmine",
+    "webdriver",
+    "webdriverjs",
+    "selenium"
+  ],
+  "homepage": "https://github.com/te2est-springnut",
+  "bugs": {
+    "url": "https://github.com/carrascoMDD/te2est-springnut/issues"
+  },
+  "license": "EUPL-1.1",
+  "author": {
+    "name": "Antonio Carrasco Valero",
+    "email": "carrascomdd@gmail.com"
+  },
+  "files": [],
+  "main": null,
+  "bin": null,
+  "man": null,
+  "directories": {    
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carrascoMDD/te2est-springnut.git"
+  },
+  "scripts": {},
+  "config": {},
+  "dependencies": {
+    "asyncshell": "0.3.x"
+  },
+  "devDependencies": {
+  },
+  "bin": {
+  },
+  "scripts": {
+  },
+  "maintainers": [
+    {
+      "name": "Antonio Carrasco Valero",
+      "email": "carrascomdd@gmail.com"
+    }
+  ]
+}

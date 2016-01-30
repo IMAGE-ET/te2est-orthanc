@@ -1,0 +1,32 @@
+{
+    "name": "suite-10-orthanc-rest-modalities-get-test",
+    "runnable": true,
+    "expectSuccess": true,
+    "module": "@cmppath/common-test/requestreply-test",
+    "constructorName": "RequestReply_Constructor",
+    "methodName": "pF_RequestReply",
+    "scheduleSubs": "SERIES",
+    "parms": {
+        "salutation": "Hello suite-10-orthanc-rest-modalities-get-test. You are using te2est asyncshell written in Javascript. Copyright 2014 2015 Antonio Carrasco Valero {{CopyrightNoticeJSON2}} Licensed under the EUPL, Version 1.1 only (the 'Licence'); You may not use this work except in compliance with the Licence. You may obtain a copy of the Licence at: https://joinup.ec.europa.eu/software/page/eupl/licence-eupl Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an 'AS IS' basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the Licence for the specific language governing permissions and limitations under the Licence.  {{LicenseJSON2}}  {{LicensedJSON1}} {{LicensedJSON2}}",
+        "requestreply": {
+            "baseURLparmName": "hitpoint-orthanc-rest.baseURL",
+            "requestmethod": "GET",
+            "URLpath": "/modalities",
+            "URLparms": null,
+            "URLparmsnotencoded": null,
+            "URLpathParms": null,
+            "statuscode": 200,
+            "dumpurl":                true,
+            "UNUSED_dumprequestdata": true,
+            "UNUSED_dumpreply":       true
+        }
+    },
+    "imports": [
+        {
+            "name": "hitpoint-orhanc-import",
+            "configurationPath": "@testspath/orthanc/orthanc-rest/parms-hitpoint-orthanc-rest.json",
+            "importMode": "STATIC"
+        }
+    ]
+}
+

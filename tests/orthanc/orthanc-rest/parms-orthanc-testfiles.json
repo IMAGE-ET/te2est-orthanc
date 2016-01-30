@@ -1,0 +1,10 @@
+{
+    "name": "parms-orthanc-testfiles",
+    "parms": {
+        "parmsfororthanctestfiles": {
+            "baseDirectoryForOrthancTestFiles": "~/orthancTestFiles",
+            "dirwithdicomfiles":                "dicomfiles"
+        }
+    }
+}
+

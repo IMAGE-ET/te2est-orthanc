@@ -1,0 +1,18 @@
+{
+    "name": "parms-hitpoint-orthanc-rest",
+    "parms": {
+        "hitpoint-orthanc-rest": {
+            "baseURL": "http://localhost:8042",
+
+            "XXXSamples_URLs": "http://localhost:8042/system",
+            "XXX01Samples_URLs": "http://localhost:8042/modalities",
+            "XXX02Samples_URLs": "http://localhost:8042/peers",
+            "XXX03Samples_URLs": "http://localhost:8042/patients",
+            "XXX04Samples_URLs": "http://localhost:8042/series",
+            "XXX05Samples_URLs": "http://localhost:8042/studies"
+        }
+    }
+}
+
+
+
